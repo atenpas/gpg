@@ -46,6 +46,11 @@ void CandidatesGenerator::preprocessPointCloud(CloudCamera& cloud_cam)
     cloud_cam.filterWorkspace(params_.workspace_);
     std::cout << "After workspace filtering: " << cloud_cam.getCloudProcessed()->size() << " points left.\n";
 
+    if (cloud_cam.getCloudProcessed()->size() == 0)
+    {
+      return;
+    }
+
     // 2. Voxelization
     if (params_.voxelize_)
     {
