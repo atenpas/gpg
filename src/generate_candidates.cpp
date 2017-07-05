@@ -34,9 +34,10 @@ int main(int argc, char* argv[])
   // Read arguments from command line.
   if (argc < 3)
   {
-    std::cout << "Not enough input arguments!\n";
-    std::cout << "Usage: generate_candidates [CONFIG_FILE] [PCD_FILE]\n";
-    std::cout << "Generate grasp candidates for point cloud PCD_FILE using parameters from CONFIG_FILE.\n";
+    std::cout << "Error: Not enough input arguments!\n\n";
+    std::cout << "Usage: generate_candidates [CONFIG_FILE] [PCD_FILE] [NORMALS_FILE]\n\n";
+    std::cout << "Generate grasp candidates for a point cloud, PCD_FILE (*.pcd), using parameters from CONFIG_FILE (*.cfg).\n\n";
+    std::cout << "[NORMALS_FILE] (optional) contains a surface normal for each point in the cloud (*.csv).\n";
     return (-1);
   }
 
@@ -116,7 +117,15 @@ int main(int argc, char* argv[])
     return (-1);
   }
 
-  // Point cloud preprocessing: voxelize, remove statistical outliers, workspace filter, subsample, compute normals.
+  // Load surface normals from file.
+  std::cout << argc << "\n";
+  if (argc > 3)
+  {
+    cloud_cam.setNormalsFromFile(argv[3]);
+    std::cout << "Loaded surface normals from file.\n";
+  }
+
+  // Point cloud preprocessing: voxelize, remove statistical outliers, workspace filter, compute normals, subsample.
   candidates_generator.preprocessPointCloud(cloud_cam);
 
   // Generate a list of grasp candidates.
