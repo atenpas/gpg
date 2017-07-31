@@ -29,7 +29,7 @@ generates 6-DOF grasp poses for a 2-finger grasp.
 
    ```
    $ cd <location_of_your_workspace>
-   $ git clone https://github.ccs.neu.edu/atp/gpg.git
+   $ git clone https://github.com/atenpas/gpg.git
    ```
 
 2. Build the project: 
