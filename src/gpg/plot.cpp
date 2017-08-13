@@ -28,14 +28,14 @@ void Plot::plotFingers(const std::vector<Grasp>& hand_list, const PointCloudRGBA
 
   boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer = createViewer(str);
 
-  pcl::visualization::PointCloudColorHandlerRGBAField<pcl::PointXYZRGBA> rgb(cloud);
+  pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGBA> rgb(cloud);
   viewer->addPointCloud<pcl::PointXYZRGBA>(cloud, rgb, "cloud");
   viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "cloud");
 
   PointCloudRGBA::Ptr cloud_fingers(new PointCloudRGBA);
   cloud_fingers = createFingersCloud(hand_list, outer_diameter);
 
-  pcl::visualization::PointCloudColorHandlerRGBAField<pcl::PointXYZRGBA> rgb_fingers(cloud_fingers);
+  pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGBA> rgb_fingers(cloud_fingers);
   viewer->addPointCloud<pcl::PointXYZRGBA>(cloud_fingers, rgb_fingers, "fingers");
   viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "fingers");
 
