@@ -173,8 +173,10 @@ std::vector<GraspSet> HandSearch::evaluateHands(const CloudCamera& cloud_cam, co
   double t1 = omp_get_wtime();
 
   // possible angles used for hand orientations
-  Eigen::VectorXd angles = Eigen::VectorXd::LinSpaced(params_.num_orientations_ + 1, -1.0 * M_PI/2.0, M_PI/2.0);
-  angles = angles.block(0, 0, params_.num_orientations_, 1);
+  Eigen::VectorXd angles_space = Eigen::VectorXd::LinSpaced(params_.num_orientations_ + 1, -1.0 * M_PI/2.0, M_PI/2.0);
+
+  // necessary b/c assignment in Eigen does not change vector size
+  Eigen::VectorXd angles = angles_space.head(params_.num_orientations_);
 
   std::vector<int> nn_indices;
   std::vector<float> nn_dists;

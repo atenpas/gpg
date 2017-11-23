@@ -130,6 +130,11 @@ class CandidatesGenerator
       params_.num_samples_ = num_samples;
     }
 
+    const HandSearch::Parameters& getHandSearchParams() const
+    {
+      return hand_search_->getParams();
+    }
+
 
   private:
 

@@ -416,7 +416,6 @@ void CloudCamera::calculateNormalsOMP(int num_threads)
   }
 
   // Calculate surface normals for each view point.
-  std::cout << "view_points_:\n" << view_points_ << "\n";
   std::vector<PointCloudNormal::Ptr> normals_list(view_points_.cols());
   pcl::NormalEstimationOMP<pcl::PointXYZRGBA, pcl::Normal> estimator(num_threads);
   pcl::search::KdTree<pcl::PointXYZRGBA>::Ptr tree_ptr(new pcl::search::KdTree<pcl::PointXYZRGBA>);

@@ -57,6 +57,32 @@ class Plot
   public:
 
     /**
+     * \brief Plot a list of grasp sets with 3D cubes.
+     * \param hand_set_list the list of grasp sets
+     * \param cloud the point cloud to be plotted
+     * \param str the title of the plot window
+     * \param outer_diameter the outer diameter of the robot hand
+     * \param finger_width the width of the robot fingers
+     * \param hand_depth the depth of the robot hand
+     * \param hand_height the height of the robot hand
+     */
+    void plotFingers3D(const std::vector<GraspSet>& hand_set_list, const PointCloudRGBA::Ptr& cloud,
+      std::string str, double outer_diameter, double finger_width, double hand_depth, double hand_height) const;
+
+    /**
+     * \brief Plot a list of grasps with 3D cubes.
+     * \param hand_list the list of grasps
+     * \param cloud the point cloud to be plotted
+     * \param str the title of the plot window
+     * \param outer_diameter the outer diameter of the robot hand
+     * \param finger_width the width of the robot fingers
+     * \param hand_depth the depth of the robot hand
+     * \param hand_height the height of the robot hand
+     */
+    void plotFingers3D(const std::vector<Grasp>& hand_list, const PointCloudRGBA::Ptr& cloud,
+      std::string str, double outer_diameter, double finger_width, double hand_depth, double hand_height) const;
+
+    /**
      * \brief Plot a list of grasp sets.
      * \param hand_set_list the list of grasp sets
      * \param cloud the point cloud to be plotted
@@ -138,6 +164,32 @@ class Plot
 
 
   private:
+
+    /**
+     * \brief Plot a grasp.
+     * \param viewer viewer the PCL visualizer in which the grasp is plotted
+     * \param hand the grasp
+     * \param outer_diameter the outer diameter of the robot hand
+     * \param finger_width the width of the robot fingers
+     * \param hand_depth the depth of the robot hand
+     * \param hand_height the height of the robot hand
+     * \param idx the ID of the grasp in the viewer
+     */
+    void plotHand3D(boost::shared_ptr<pcl::visualization::PCLVisualizer>& viewer, const Grasp& hand,
+      double outer_diameter, double finger_width, double hand_depth, double hand_height, int idx) const;
+
+    /**
+     * \brief Plot a cube.
+     * \param viewer viewer the PCL visualizer in which the grasp is plotted
+     * \param position the center of the cube
+     * \param rotation the orientation of the cube
+     * \param width the width of the cube
+     * \param height the height of the cube
+     * \param depth the depth of the cube
+     * \param name the name of the cube in the viewer
+     */
+    void plotCube(boost::shared_ptr<pcl::visualization::PCLVisualizer>& viewer, const Eigen::Vector3d& position,
+      const Eigen::Quaterniond& rotation, double width, double height, double depth, const std::string& name) const;
 
     /**
      * \brief Create a point cloud that stores the visual representations of the grasps.

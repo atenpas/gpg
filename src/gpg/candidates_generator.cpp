@@ -142,7 +142,9 @@ std::vector<Grasp> CandidatesGenerator::generateGraspCandidates(const CloudCamer
 
   if (params_.plot_grasps_)
   {
-    plotter_.plotFingers(candidates, cloud_cam.getCloudOriginal(), "Grasp Candidates");
+    const HandSearch::Parameters& params = hand_search_->getParams();
+    plotter_.plotFingers3D(candidates, cloud_cam.getCloudOriginal(), "Grasp Candidates", params.hand_outer_diameter_,
+      params.finger_width_, params.hand_depth_, params.hand_height_);
   }
 
   return candidates;
@@ -156,7 +158,9 @@ std::vector<GraspSet> CandidatesGenerator::generateGraspCandidateSets(const Clou
 
   if (params_.plot_grasps_)
   {
-    plotter_.plotFingers(hand_set_list, cloud_cam.getCloudOriginal(), "Grasp Candidates");
+    const HandSearch::Parameters& params = hand_search_->getParams();
+    plotter_.plotFingers3D(hand_set_list, cloud_cam.getCloudOriginal(), "Grasp Candidates", params.hand_outer_diameter_,
+      params.finger_width_, params.hand_depth_, params.hand_height_);
   }
 
   return hand_set_list;

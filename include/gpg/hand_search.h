@@ -119,6 +119,11 @@ public:
   std::vector<Grasp> reevaluateHypotheses(const CloudCamera& cloud_cam, const std::vector<Grasp>& grasps,
     bool plot_samples = false) const;
 
+  const Parameters& getParams () const
+  {
+    return params_;
+  }
+
   /**
    * \brief Set the parameters for the hand search.
    * \param params the parameters
