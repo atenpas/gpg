@@ -13,7 +13,7 @@ void LocalFrame::print()
 
 void LocalFrame::findAverageNormalAxis(const Eigen::MatrixXd &normals)
 {
-  // 1. Calculate curvature axis.
+  // 1. Calculate "curvature axis" (corresponds to minor principal curvature axis).
   Eigen::Matrix3d M = normals * normals.transpose();
   Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> eigen_solver(M); // M is adjoint (M is equal to its transpose)
   Eigen::Vector3d eigen_values = eigen_solver.eigenvalues().real();
@@ -22,7 +22,7 @@ void LocalFrame::findAverageNormalAxis(const Eigen::MatrixXd &normals)
   eigen_values.minCoeff(&min_index);
   curvature_axis_ = eigen_vectors.col(min_index);
 
-  // 2. Calculate surface normal (corresponds to major principal curvature axis).
+  // 2. Calculate surface normal.
   int max_index;
   eigen_values.maxCoeff(&max_index);
   normal_ = eigen_vectors.col(max_index);
@@ -35,7 +35,7 @@ void LocalFrame::findAverageNormalAxis(const Eigen::MatrixXd &normals)
     normal_ *= -1.0;
   }
 
-  // 4. Create binormal.
+  // 4. Create binormal (corresponds to major principal curvature axis).
   binormal_ = curvature_axis_.cross(normal_);
 }
 
